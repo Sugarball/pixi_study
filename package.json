@@ -1,0 +1,13 @@
+{
+  "name": "pixi_study",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "browser-sync": "^2.18.13",
+    "pixi.js": "^4.5.5"
+  },
+  "scripts": {
+    "start": "browser-sync start --server --files '.'"
+  }
+}
