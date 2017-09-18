@@ -1,0 +1,20 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Container</title>
+<body>
+<script src="node_modules/pixi.js/dist/pixi.js"></script>
+<script>
+
+var renderer = PIXI.autoDetectRenderer(256, 256)
+
+renderer.view.style.border = '1px dashed black'
+renderer.resize(512, 512)
+renderer.backgroundColor = '0x061639'
+
+document.body.appendChild(renderer.view)
+var stage = new PIXI.Container()
+renderer.render(stage)
+
+</script>
+</body>
+

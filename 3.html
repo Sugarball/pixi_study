@@ -1,0 +1,42 @@
+
+<!doctype html>
+<meta charset="utf-8">
+<title>style a sprite</title>
+<body>
+<script src="node_modules/pixi.js/dist/pixi.js"></script>
+<script>
+
+let Container = PIXI.Container
+let autoDetectRenderer = PIXI.autoDetectRenderer
+let loader = PIXI.loader
+let resources = PIXI.loader.resources
+let TextureCache = PIXI.utils.TextureCache
+let Sprite = PIXI.Sprite
+
+let stage = new Container()
+let renderer = autoDetectRenderer(256, 256)
+document.body.appendChild(renderer.view)
+
+loader
+  .add("images/cat.png")
+  .load(setup)
+
+function setup() {
+
+  var cat = new Sprite(resources["images/cat.png"].texture)
+
+  cat.x = 96
+  cat.y = 96
+  cat.width = 80
+  cat.height = 120
+  cat.anchor.x = 0.5
+  cat.anchor.y = 0.5
+  cat.rotation = 0.3
+  
+  stage.addChild(cat)
+
+  renderer.render(stage)
+}
+</script>
+</body>
+

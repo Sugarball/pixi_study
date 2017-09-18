@@ -1,0 +1,73 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Make a sprite from a texture atlas</title>
+<body>
+<script src="node_modules/pixi.js/dist/pixi.js"></script>
+<script>
+
+//Aliases
+let Container = PIXI.Container
+let autoDetectRenderer = PIXI.autoDetectRenderer
+let loader = PIXI.loader
+let resources = PIXI.loader.resources
+let TextureCache = PIXI.utils.TextureCache
+let Texture = PIXI.Texture
+let Sprite = PIXI.Sprite
+
+let stage = new Container()
+let renderer = autoDetectRenderer(512, 512)
+document.body.appendChild(renderer.view)
+
+loader
+  .add("images/treasureHunter.json")
+  .load(setup);
+
+
+let dungeon, explorer, treasure, door
+
+function setup() {
+
+  dungeon = new Sprite(TextureCache["dungeon.png"])
+  stage.addChild(dungeon);
+
+  explorer = new Sprite(TextureCache["explorer.png"])
+  explorer.x = 68
+  explorer.y = stage.height / 2 - explorer.height / 2
+  stage.addChild(explorer)
+
+  treasure = new Sprite(TextureCache["treasure.png"])
+  stage.addChild(treasure)
+
+  treasure.x = stage.width - treasure.width - 48
+  treasure.y = stage.height / 2 - treasure.height / 2
+  stage.addChild(treasure)
+
+  door = new Sprite(TextureCache["door.png"])
+  door.position.set(32, 0)
+  stage.addChild(door)
+
+  //Make the blobs
+  let numberOfBlobs = 6
+  let spacing = 48
+  let xOffset = 150
+
+  for (var i = 0; i < numberOfBlobs; i++) {
+    var blob = new Sprite(TextureCache["blob.png"])
+    var x = spacing * i + xOffset
+    var y = randomInt(0, stage.height - blob.height)
+    blob.x = x
+    blob.y = y
+    stage.addChild(blob)
+  }
+
+  renderer.render(stage)
+}
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+</script>
+</body>
+
+

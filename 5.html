@@ -1,0 +1,48 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Moving sprites</title>
+<body>
+<script src="node_modules/pixi.js/dist/pixi.js"></script>
+<script>
+
+//Aliases
+let Container = PIXI.Container,
+    autoDetectRenderer = PIXI.autoDetectRenderer,
+    loader = PIXI.loader,
+    resources = PIXI.loader.resources,
+    TextureCache = PIXI.utils.TextureCache,
+    Texture = PIXI.Texture,
+    Sprite = PIXI.Sprite
+
+
+let stage = new Container(),
+    renderer = autoDetectRenderer(256, 256)
+document.body.appendChild(renderer.view)
+
+loader
+  .add("images/cat.png")
+  .load(setup)
+
+let  cat
+function setup() {
+  cat = new Sprite(resources["images/cat.png"].texture)
+  cat.y = 96
+  stage.addChild(cat)
+  console.log('stage', stage)
+  console.log('renderer', renderer)
+  gameLoop()
+}
+
+function gameLoop(){
+  requestAnimationFrame(gameLoop)
+  if (cat.x <= renderer.width) {
+    cat.x += 1
+  } else {
+    cat.x = 0
+  }
+  renderer.render(stage)
+}
+</script>
+</body>
+
+
